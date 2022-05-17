@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            span#clock {
+                width: 100px;
+                border-style: solid;
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="window.open('https://baidu.com')">Open Baidu</button>
+        <button onclick="window.open('index.html')">Origin position tp</button>
+        <button onclick="alert(confirm('sure to delete?'))">confirm</button>
+        <button onclick="alert(prompt('input book\'s price'))">prompt</button>
+        <br><br>
+        <span id="clock">0</span>
+        <button onclick="startCount()">start</button>
+        <button onclick="stopCount()">stop</button>
+        <button onclick="clearCount()">clear</button>
+
+        <hr>
+        <div id='div1'>
+            <p id='p1'>p1111111</p>
+            <p id='p2'>p2222222</p>
+        </div>
+        <button onclick="changeColor()">change background-color</button>
+        <button onclick="changeContent()">change content</button>
+
+        <hr>
+        <div id="section3">
+        </div>
+        <button type="button" onclick="addSelect()">add select</button>
+        <button type="button" onclick="delSelect()">delete select</button>
+
+
+        <script>
+            var count = 0, index, existed = false;
+            function started() {
+                document.getElementById('clock').innerHTML = count++;
+            }
+            function startCount() {
+                if (!existed) {
+                    index = setInterval(started, 1000);
+                    existed = true;
+                }
+            }
+
+            function stopCount() {
+                clearInterval(index);
+                existed = false;
+            }
+
+            function clearCount() {
+                count = 0;
+                document.getElementById('clock').innerHTML = count;
+                clearInterval(index);
+                existed = false;
+            }
+        </script>
+        <script>
+            function changeColor() {
+                var div1 = document.getElementById('div1');
+                div1.style.backgroundColor = "yellow";
+            }
+
+            function changeContent() {
+                var ps = document.querySelectorAll("p");
+                for (var i = 0; i < ps.length; i++) {
+                    ps[i].innerHTML = "changed " + i;
+                }
+            }
+        </script>
+        <script>
+            function addSelect() {
+                var d = document.getElementById("section3");
+
+                if (document.getElementById('select1')) {
+                    return;
+                } //已创建过不再创建
+
+                var select = document.createElement('select');
+                select.id = 'select1';
+
+                for (var i = 0; i < 6; i++) {
+                    var option, optiontext;
+                    option = document.createElement('option');
+                    optiontext = document.createTextNode("opt" + i);
+
+                    option.appendChild(optiontext);
+                    option.value = i;
+
+                    select.appendChild(option);
+                }
+                select.onchange = function() {
+                    alert(this.options[this.selectedIndex].value);
+                }
+                d.appendChild(select);
+            }
+            
+            function delSelect() {
+                var d = document.getElementById('section3');
+                d.removeChild(d.childNodes[0]);
+            }
+        </script>
+    </body>
+</html>
