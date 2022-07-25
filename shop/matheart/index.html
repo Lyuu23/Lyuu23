@@ -13,9 +13,11 @@
         }
 
         function randomPic() {
-            var e = document.getElementById("img1");
+            document.getElementById("p1").setAttribute("aria-busy", "true");
+            var img = document.getElementById("img1");
+            img.src = "";
             var id = randomInt(0, 10);
-            e.src = `./名言/${id}.png`;
+            img.src = `./名言/${id}.png`;
             document.getElementById("p1").innerHTML = "商品" + (id + 1);
         }
     </script>
@@ -27,7 +29,7 @@
         <h2>❤超市数心❤</h2>
         <br>
         <div class="sample">
-            <p id="p1">商品1</p>
+            <p id="p1" aria-busy="false">商品1</p>
             <img src="./名言/0.png" alt="数心被透坏掉了" id="img1" onclick="randomPic()">
         </div>
         
@@ -36,6 +38,12 @@
     <div class="footer">
         <p>❤ Just For Matheart ❤</p>
     </div>
+    <script>
+        var img = document.getElementById("img1");
+        img.onload = function () {
+            document.getElementById("p1").setAttribute("aria-busy", "false");
+        }
+    </script>
 </body>
 
 </html>
